@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RMFAR</title>
+
+    <link rel="icon" href="img/icon.png">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw==" crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta name="robots" content="noindex, follow">
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="logo"></div>
+        <div class="row" style="text-align: center;">
+            <div style="display: inline-block;">
+                <img src="img/escudoPUJ-Bogota_rgb-azul_lateral.png">
+            </div>
+        </div>
+
+        <div class="container" style="margin-bottom: 10px;">
+            <h1 style="margin-top: 10px;">RMFAR</h1>
+            <h3 style="margin-top: 10px;">Modelo de recomendaciones para la mitigación de delitos de hurto</h3>
+            <div>
+                <ul>
+                    <li>
+                        <h5 style="text-align: left;"><strong>Fecha:</strong> Fecha y hora en la que la persona va a estar en el lugar.</h5>
+                    </li>
+                    <li>
+                        <h5 style="text-align: left;"><strong>Barrio:</strong> Barrio en el que va a estar la persona.</h5>
+                    </li>
+                    <li>
+                        <h5 style="text-align: left;"><strong>Genero:</strong> Genero de la persona.</h5>
+                    </li>
+                    <li>
+                        <h5 style="text-align: left;"><strong>Actividad en:</strong> Lugar en el que la persona pretende realizar la actividad.</h5>
+                    </li>
+                </ul>
+            </div>
+            <form class="form-inline p-3" style="padding: 10px;">
+                <div class="row">
+                    <div class="flatpickr form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <label for="name" class="control-label" id="label_fecha">Fecha y Hora</label>
+                        <input type="text" class="form-control" id="fecha" placeholder="Fecha y Hora" data-input>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <label for="name" class="control-label">Barrio</label>
+                        <select class="selectpicker" data-live-search="true" title="Barrio" id="barrio">
+                            <option value="AGUAS CALIENTES E-11">Aguas Calientes</option>
+                            <option value="ALCAPARROS I-II E-11">Alcaparros I-Ii</option>
+                            <option value="ALCAZAR DE SUBA E-11">Alcazar De Suba</option>
+                            <option value="ALCAZARES DE SUBA E-11">Alcazares De Suba</option>
+                            <option value="ALDIA PLAZA EL RELOJ E-11">Aldia Plaza El Reloj</option>
+                            <option value="ALEJANDRO PARDO E-11">Alejandro Pardo</option>
+                            <option value="ALEJANDRO PARDO E-11">Alejandro Pardo</option>
+                            <option value="ALFONSO JARAMILLO E-11">Alfonso Jaramillo</option>
+                            <option value="ALHAMBRA SECTOR NORTE E-11">Alhambra Sector Norte</option>
+                            <option value="ALMANARA E-11">Almanara</option>
+                            <option value="ALMENDROS E-11">Almendros</option>
+                            <option value="ALMIRANTE COLON E-11">Almirante Colon</option>
+                            <option value="ALTAMAR E-11">Altamar</option>
+                            <option value="ALTAMIRA E-11">Altamira</option>
+                            <option value="ALTAMIRA E-11">Altamira</option>
+                            <option value="ALTILLOS DE SUBA E-11">Altillos De Suba</option>
+                            <option value="ALTOS DE CHOZICA E-11">Altos De Chozica</option>
+                            <option value="ALTOS DE LA ESPERANZA I SECTOR E-11">Altos De La Esperanza I Sector</option>
+                            <option value="ALTOS DE SAN JORGE E-11">Altos De San Jorge</option>
+                            <option value="ALTOS DE SAN JORGE E-11">Altos De San Jorge</option>
+                            <option value="ALTOS DEL RINCON E-11">Altos Del Rincon</option>
+                            <option value="AMBERES E-11">Amberes</option>
+                            <option value="AMBERES E-11">Amberes</option>
+                            <option value="ANDES E-11">Andes</option>
+                            <option value="ANTONIO GRANADO SUBA E-11">Antonio Granado Suba</option>
+                            <option value="ARBOLEDA DE SUBA E-11">Arboleda De Suba</option>
+                            <option value="ARCOS DE BRITALIA E-11">Arcos De Britalia</option>
+                            <option value="ARCOS DE BRITALIA E-11">Arcos De Britalia</option>
+                            <option value="ARRAYANES E-11">Arrayanes</option>
+                            <option value="ARRAYANES SUBA E-11">Arrayanes Suba</option>
+                            <option value="ATABANZA E-11">Atabanza</option>
+                            <option value="ATARDECERES DE SUBA E-11">Atardeceres De Suba</option>
+                            <option value="ATENAS E-11">Atenas</option>
+                            <option value="AURES I E-11">Aures I</option>
+                            <option value="AURES I-II E-11">Aures I-Ii</option>
+                            <option value="AURES II E-11">Aures Ii</option>
+                            <option value="AURES II SECTOR LA PLATA E-11">Aures Ii Sector La Plata</option>
+                            <option value="AURES II SECTOR LA PLATA E-11">Aures Ii Sector La Plata</option>
+                            <option value="AVENIDA DEL TABORA E-11">Avenida Del Tabora</option>
+                            <option value="BALCON DE SUBA E-11">Balcon De Suba</option>
+                            <option value="BALCON VILLANOVA E-11">Balcon Villanova</option>
+                            <option value="BALCON VILLANOVA E-11">Balcon Villanova</option>
+                            <option value="BALCONES DE SUBA E-11">Balcones De Suba</option>
+                            <option value="BARAJAS E-11">Barajas</option>
+                            <option value="BARANDILLAS DE SUBA E-11">Barandillas De Suba</option>
+                            <option value="BERLIN E-11">Berlin</option>
+                            <option value="BERLIN IV SECTOR E-11">Berlin Iv Sector</option>
+                            <option value="BERLIN IV SECTOR E-11">Berlin Iv Sector</option>
+                            <option value="BERLIN SUBA E-11">Berlin Suba</option>
+                            <option value="BILABAO I SECTOR SECCIONES A Y B E-11">Bilabao I Sector Secciones A Y B
+                            </option>
+                            <option value="BILBAO E-11">Bilbao</option>
+                            <option value="BILBAO II ETAPA E-11">Bilbao Ii Etapa</option>
+                            <option value="BOCA COLINA E-11">Boca Colina</option>
+                            <option value="BOCACOLINA E-11">Bocacolina</option>
+                            <option value="BOCACOLINA E-11">Bocacolina</option>
+                            <option value="BOCHALEMA E-11">Bochalema</option>
+                            <option value="BOSQUE DE GRATAMIRA E-11">Bosque De Gratamira</option>
+                            <option value="BOSQUE DE LA COLINA E-11">Bosque De La Colina</option>
+                            <option value="BOSQUE DE LOS LAGARTOS E-11">Bosque De Los Lagartos</option>
+                            <option value="BOSQUE DE SAN DIEGO E-11">Bosque De San Diego</option>
+                            <option value="BOSQUE DE SUBA E-11">Bosque De Suba</option>
+                            <option value="BOSQUES DE SAN JORGE E-11">Bosques De San Jorge</option>
+                            <option value="BOSQUES DE SUBA E-11">Bosques De Suba</option>
+                            <option value="BOSQUES DEL PORTAL E-11">Bosques Del Portal</option>
+                            <option value="BRASILIA E-11">Brasilia</option>
+                            <option value="BRISAS DE IBERIA E-11">Brisas De Iberia</option>
+                            <option value="BRISAS DE IBERIA E-11">Brisas De Iberia</option>
+                            <option value="BRITALIA E-11">Britalia</option>
+                            <option value="BRITALIA (SAN DIEGO) E-11">Britalia (San Diego)</option>
+                            <option value="BRITALIA (SAN DIEGO) E-11">Britalia (San Diego)</option>
+                            <option value="BRITALIA ALTA E-11">Britalia Alta</option>
+                            <option value="BRITALIA PORTALES DEL NORTE E-11">Britalia Portales Del Norte</option>
+                            <option value="BURGOS (BRITALIA) E-11">Burgos (Britalia)</option>
+                            <option value="CALATRAVA E-11">Calatrava</option>
+                            <option value="CALIMA NORTE E-11">Calima Norte</option>
+                            <option value="CALIMA NORTE E-11">Calima Norte</option>
+                            <option value="CALLE 100 E-11">Calle 100</option>
+                            <option value="CAMINO DE LA ESTANCIA E-11">Camino De La Estancia</option>
+                            <option value="CAMINO DE LA ESTANCIA E-11">Camino De La Estancia</option>
+                            <option value="CAMINO VERDE E-11">Camino Verde</option>
+                            <option value="CAMINO VERDE E-11">Camino Verde</option>
+                            <option value="CAMPANELLA E-11">Campanella</option>
+                            <option value="CAMPANELLA I Y II ETAPA E-11">Campanella I Y Ii Etapa</option>
+                            <option value="CAMPANIA E-11">Campania</option>
+                            <option value="CAMPIÑA E-11">Campiña</option>
+                            <option value="CANODROMO E-11">Canodromo</option>
+                            <option value="CANTABRIA E-11">Cantabria</option>
+                            <option value="CANTALEJO E-11">Cantalejo</option>
+                            <option value="CANTALEJO SECTOR ALEJANDRIA E-11">Cantalejo Sector Alejandria</option>
+                            <option value="CARIMAGUA II E-11">Carimagua Ii</option>
+                            <option value="CAROLINA II SECTOR E-11">Carolina Ii Sector</option>
+                            <option value="CAROLINA II SECTOR E-11">Carolina Ii Sector</option>
+                            <option value="CASA BLANCA E-11">Casa Blanca</option>
+                            <option value="CASA BLANCA I E-11">Casa Blanca I</option>
+                            <option value="CASA BLANCA I E-11">Casa Blanca I</option>
+                            <option value="CASA BLANCA II E-11">Casa Blanca Ii</option>
+                            <option value="CASA BLANCA II E-11">Casa Blanca Ii</option>
+                            <option value="CASA BLANCA SECTOR EL PLAN E-11">Casa Blanca Sector El Plan</option>
+                            <option value="CASA BLANCA SECTOR EL PLAN E-11">Casa Blanca Sector El Plan</option>
+                            <option value="CASA BLANCA SUBA I E-11">Casa Blanca Suba I</option>
+                            <option value="CASA BLANCA SUBA II E-11">Casa Blanca Suba Ii</option>
+                            <option value="CASA EN EL PRADO SAN PEDRO E-11">Casa En El Prado San Pedro</option>
+                            <option value="CASA EN EL PRADO SAN PEDRO E-11">Casa En El Prado San Pedro</option>
+                            <option value="CASIGUA E-11">Casigua</option>
+                            <option value="CASIGUA E-11">Casigua</option>
+                            <option value="CATALEJO E-11">Catalejo</option>
+                            <option value="CATALU√ëA E-11">Catalu√Ëa</option>
+                            <option value="CATALUÑA E-11">Cataluña</option>
+                            <option value="CENTRO ALTO E-11">Centro Alto</option>
+                            <option value="CENTRO ALTO E-11">Centro Alto</option>
+                            <option value="CENTRO COM CENTROSUBA E-11">Centro Com Centrosuba</option>
+                            <option value="CENTRO COM SUBA E-11">Centro Com Suba</option>
+                            <option value="CENTRO COMERCIAL BULEVAR E-11">Centro Comercial Bulevar</option>
+                            <option value="CEREZOS DE SUBA E-11">Cerezos De Suba</option>
+                            <option value="CERROS 170 I ETAPA E-11">Cerros 170 I Etapa</option>
+                            <option value="CERROS DE LOS LAGARTOS E-11">Cerros De Los Lagartos</option>
+                            <option value="CERROS DE NIZA E-11">Cerros De Niza</option>
+                            <option value="CERROS DE SOTILEZA E-11">Cerros De Sotileza</option>
+                            <option value="CERROS DE SUBA E-11">Cerros De Suba</option>
+                            <option value="CERROS DE SUBA II SECTOR E-11">Cerros De Suba Ii Sector</option>
+                            <option value="CHICALA E-11">Chicala</option>
+                            <option value="CHOCITA E-11">Chocita</option>
+                            <option value="CHOCITA E-11">Chocita</option>
+                            <option value="CHORRILLOS E-11">Chorrillos</option>
+                            <option value="CHUCUA III SECTOR E-11">Chucua Iii Sector</option>
+                            <option value="CIUDAD DE HUNZA E-11">Ciudad De Hunza</option>
+                            <option value="CIUDAD HUNZA E-11">Ciudad Hunza</option>
+                            <option value="CIUDAD JARDIN E-11">Ciudad Jardin</option>
+                            <option value="CIUDADELA BOSQ SUBA E-11">Ciudadela Bosq Suba</option>
+                            <option value="CIUDADELA BOSQ SUBA E-11">Ciudadela Bosq Suba</option>
+                            <option value="CIUDADELA CAFAM E-11">Ciudadela Cafam</option>
+                            <option value="CIUDADELA NVA TIBABUYES E-11">Ciudadela Nva Tibabuyes</option>
+                            <option value="CLUB BACATA E-11">Club Bacata</option>
+                            <option value="CLUB BACATA E-11">Club Bacata</option>
+                            <option value="CLUB DE LOS LAGARTOS E-11">Club De Los Lagartos</option>
+                            <option value="CLUB EL CARMEN E-11">Club El Carmen</option>
+                            <option value="CLUB EL CARMEN E-11">Club El Carmen</option>
+                            <option value="CLUB LOS ARRAYANES E-11">Club Los Arrayanes</option>
+                            <option value="COASMEDAS E-11">Coasmedas</option>
+                            <option value="COASMEDAS E-11">Coasmedas</option>
+                            <option value="COLINA LINDA E-11">Colina Linda</option>
+                            <option value="COLONIA NORTE II ETAPA E-11">Colonia Norte Ii Etapa</option>
+                            <option value="COMPARTIR E-11">Compartir</option>
+                            <option value="COMPOSTELA E-11">Compostela</option>
+                            <option value="COMPOSTELA E-11">Compostela</option>
+                            <option value="CONCHITA ALTAMIRA VILLA LUZ E-11">Conchita Altamira Villa Luz</option>
+                            <option value="CONCHITA ALTAMIRA VILLA LUZ E-11">Conchita Altamira Villa Luz</option>
+                            <option value="CONDADO DE IBERIA III E-11">Condado De Iberia Iii</option>
+                            <option value="CONJUNTO RESIDENCIAL ALTOS DE SUBA E-11">Conjunto Residencial Altos De Suba
+                            </option>
+                            <option value="CONJUNTO RESIDENCIAL ALTOS DE SUBA E-11">Conjunto Residencial Altos De Suba
+                            </option>
+                            <option value="CORDOBA E-11">Cordoba</option>
+                            <option value="CORDOBA E-11">Cordoba</option>
+                            <option value="COSTA AZUL I Y II ETAPA E-11">Costa Azul I Y Ii Etapa</option>
+                            <option value="COSTA RICA E-11">Costa Rica</option>
+                            <option value="ECHEVERRIA E-11">Echeverria</option>
+                            <option value="EL ALCAZAR E-11">El Alcazar</option>
+                            <option value="EL BALCON DE LINDARAJA E-11">El Balcon De Lindaraja</option>
+                            <option value="EL BALCON DE LINDARAJA E-11">El Balcon De Lindaraja</option>
+                            <option value="EL BATAM II SECTOR E-11">El Batam Ii Sector</option>
+                            <option value="EL BATAN E-11">El Batan</option>
+                            <option value="EL CARMEN E-11">El Carmen</option>
+                            <option value="EL CEDRO TUNA ALTA E-11">El Cedro Tuna Alta</option>
+                            <option value="EL CEREZO E-11">El Cerezo</option>
+                            <option value="EL CERRO E-11">El Cerro</option>
+                            <option value="EL CERRO E-11">El Cerro</option>
+                            <option value="EL CHALET E-11">El Chalet</option>
+                            <option value="EL CHALET E-11">El Chalet</option>
+                            <option value="EL EDEN E-11">El Eden</option>
+                            <option value="EL ESTORIL E-11">El Estoril</option>
+                            <option value="EL JAPON E-11">El Japon</option>
+                            <option value="EL JORDAN II SECTOR E-11">El Jordan Ii Sector</option>
+                            <option value="EL JORDAN LA ESPERANZA E-11">El Jordan La Esperanza</option>
+                            <option value="EL JORDAN LA ESPERANZA E-11">El Jordan La Esperanza</option>
+                            <option value="EL LAGUITO E-11">El Laguito</option>
+                            <option value="EL LAGUITO E-11">El Laguito</option>
+                            <option value="EL LIBERTADOR E-11">El Libertador</option>
+                            <option value="EL LIBERTADOR E-11">El Libertador</option>
+                            <option value="EL MOLINO E-11">El Molino</option>
+                            <option value="EL NARANJAL E-11">El Naranjal</option>
+                            <option value="EL NARANJAL E-11">El Naranjal</option>
+                            <option value="EL NOGAL E-11">El Nogal</option>
+                            <option value="EL PARAISO E-11">El Paraiso</option>
+                            <option value="EL PARAISO E-11">El Paraiso</option>
+                            <option value="EL PESEBRE E-11">El Pesebre</option>
+                            <option value="EL PINAR E-11">El Pinar</option>
+                            <option value="EL PINAR DE SUBA II SECTOR E-11">El Pinar De Suba Ii Sector</option>
+                            <option value="EL PINO E-11">El Pino</option>
+                            <option value="EL PLAN E-11">El Plan</option>
+                            <option value="EL POA E-11">El Poa</option>
+                            <option value="EL POA LOTE A E-11">El Poa Lote A</option>
+                            <option value="EL PORTAL DE LAS MERCEDES E-11">El Portal De Las Mercedes</option>
+                            <option value="EL PORTICO E-11">El Portico</option>
+                            <option value="EL PORTICO E-11">El Portico</option>
+                            <option value="EL PORVENIR E-11">El Porvenir</option>
+                            <option value="EL PORVENIR E-11">El Porvenir</option>
+                            <option value="EL PORVENIR Y VILLANUEVA E-11">El Porvenir Y Villanueva</option>
+                            <option value="EL PROGRESO E-11">El Progreso</option>
+                            <option value="EL PROGRESO E-11">El Progreso</option>
+                            <option value="EL RECREO DE LOS FRAYLES E-11">El Recreo De Los Frayles</option>
+                            <option value="EL RECUERDO E-11">El Recuerdo</option>
+                            <option value="EL REFUGIO DE LA COLINA II SECTOR E-11">El Refugio De La Colina Ii Sector
+                            </option>
+                            <option value="EL REFUGIO DE LA COLINA II SECTOR E-11">El Refugio De La Colina Ii Sector
+                            </option>
+                            <option value="EL REFUGIO DE SUBA E-11">El Refugio De Suba</option>
+                            <option value="EL RETIRO E-11">El Retiro</option>
+                            <option value="EL RINCON E-11">El Rincon</option>
+                            <option value="EL RINCON DE IBERIA E-11">El Rincon De Iberia</option>
+                            <option value="EL RINCON DE LA 100 E-11">El Rincon De La 100</option>
+                            <option value="EL RINCON DE LA CAMAPIÑA E-11">El Rincon De La Camapiña</option>
+                            <option value="EL RINCON DE LAS VILLAS E-11">El Rincon De Las Villas</option>
+                            <option value="EL RINCON DE SUBA E-11">El Rincon De Suba</option>
+                            <option value="EL SALITRE PARTE ALTA E-11">El Salitre Parte Alta</option>
+                            <option value="EL SALITRE PARTE ALTA E-11">El Salitre Parte Alta</option>
+                            <option value="EL SALITRE SUBA E-11">El Salitre Suba</option>
+                            <option value="EL SOLAR I E-11">El Solar I</option>
+                            <option value="EL TABOR E-11">El Tabor</option>
+                            <option value="ESCUELA DE CARABINEROS E-11">Escuela De Carabineros</option>
+                            <option value="ESMERALDA E-11">Esmeralda</option>
+                            <option value="ESMERALDA E-11">Esmeralda</option>
+                            <option value="ESPERANZA LA E-11">Esperanza La</option>
+                            <option value="ESPERANZA LA E-11">Esperanza La</option>
+                            <option value="ESTADERO DEL NORTE E-11">Estadero Del Norte</option>
+                            <option value="ESTADERO DEL NORTE E-11">Estadero Del Norte</option>
+                            <option value="FINCA EL CORTIJO PREDIO EL TEJAR E-11">Finca El Cortijo Predio El Tejar
+                            </option>
+                            <option value="FINCA EL CORTIJO PREDIO EL TEJAR E-11">Finca El Cortijo Predio El Tejar
+                            </option>
+                            <option value="FINCA NUEVA ZELANDIA E-11">Finca Nueva Zelandia</option>
+                            <option value="FLORESTA DE SUBA E-11">Floresta De Suba</option>
+                            <option value="FONTANAR DEL RIO E-11">Fontanar Del Rio</option>
+                            <option value="FONTANAR DEL RIO B E-11">Fontanar Del Rio B</option>
+                            <option value="GIBRALTAR E-11">Gibraltar</option>
+                            <option value="GIBRALTAR E-11">Gibraltar</option>
+                            <option value="GILMAR E-11">Gilmar</option>
+                            <option value="GILMAR II E-11">Gilmar Ii</option>
+                            <option value="GLORIA LARA DE ECHEVERRY II ETAPA E-11">Gloria Lara De Echeverry Ii Etapa
+                            </option>
+                            <option value="GRANADA E-11">Granada</option>
+                            <option value="GRANADA NORTE E-11">Granada Norte</option>
+                            <option value="GRATAMIRA E-11">Gratamira</option>
+                            <option value="GUACARI E-11">Guacari</option>
+                            <option value="GUACARI E-11">Guacari</option>
+                            <option value="GUAYMARAL E-11">Guaymaral</option>
+                            <option value="GUICANI URBANIZACION E-11">Guicani Urbanizacion</option>
+                            <option value="GUILLERMO NUÑEZ E-11">Guillermo Nuñez</option>
+                            <option value="HACIENDA CORDOBA NIZA VIII E-11">Hacienda Cordoba Niza Viii</option>
+                            <option value="HACIENDA HATO CHICO E-11">Hacienda Hato Chico</option>
+                            <option value="HACIENDA HATO CHICO E-11">Hacienda Hato Chico</option>
+                            <option value="HACIENDA SAN SEBASTIAN E-11">Hacienda San Sebastian</option>
+                            <option value="HACIENDA SAN SEBASTIAN E-11">Hacienda San Sebastian</option>
+                            <option value="HATO CHICO II E-11">Hato Chico Ii</option>
+                            <option value="HUERTOS DE LA ESTANCIA E-11">Huertos De La Estancia</option>
+                            <option value="HUERTOS DE LA ESTANCIA E-11">Huertos De La Estancia</option>
+                            <option value="IBERIA E-11">Iberia</option>
+                            <option value="IBERIA SECTOR III E-11">Iberia Sector Iii</option>
+                            <option value="ICATA E-11">Icata</option>
+                            <option value="ICATA E-11">Icata</option>
+                            <option value="ILARCO E-11">Ilarco</option>
+                            <option value="IMPERIAL E-11">Imperial</option>
+                            <option value="JAVA I SECTOR E-11">Java I Sector</option>
+                            <option value="JAVA II SECTOR E-11">Java Ii Sector</option>
+                            <option value="JUAN AMARILLO E-11">Juan Amarillo</option>
+                            <option value="JULIO FLOREZ E-11">Julio Florez</option>
+                            <option value="LA AGUADITA E-11">La Aguadita</option>
+                            <option value="LA AGUADITA E-11">La Aguadita</option>
+                            <option value="LA ALAMEDA E-11">La Alameda</option>
+                            <option value="LA ALAMEDA E-11">La Alameda</option>
+                            <option value="LA ALBORADA E-11">La Alborada</option>
+                            <option value="LA AURORA E-11">La Aurora</option>
+                            <option value="LA BELLA SUBA E-11">La Bella Suba</option>
+                            <option value="LA BELLA SUBA E-11">La Bella Suba</option>
+                            <option value="LA BRITALIA E-11">La Britalia</option>
+                            <option value="LA CAMPIÑA I SECTOR E-11">La Campiña I Sector</option>
+                            <option value="LA CAMPIÑA II SECTOR E-11">La Campiña Ii Sector</option>
+                            <option value="LA CANDELARIA E-11">La Candelaria</option>
+                            <option value="LA CAÑIZA SECTOR I E-11">La Cañiza Sector I</option>
+                            <option value="LA CAÑIZA SECTOR II E-11">La Cañiza Sector Ii</option>
+                            <option value="LA CAÑIZA SECTOR III E-11">La Cañiza Sector Iii</option>
+                            <option value="LA CAROLINA SUBA E-11">La Carolina Suba</option>
+                            <option value="LA CHUCUA II SECTOR E-11">La Chucua Ii Sector</option>
+                            <option value="LA CHUCUA NORTE E-11">La Chucua Norte</option>
+                            <option value="LA CHUCUA SECTOR I - LAS FLORES E-11">La Chucua Sector I - Las Flores
+                            </option>
+                            <option value="LA COLINA CAMPESTRE I SECTOR E-11">La Colina Campestre I Sector</option>
+                            <option value="LA COLINA CAMPESTRE II SECTOR E-11">La Colina Campestre Ii Sector</option>
+                            <option value="LA COLINA CAMPESTRE III SECTOR E-11">La Colina Campestre Iii Sector</option>
+                            <option value="LA COLINA CAMPESTRE IV SECTOR E-11">La Colina Campestre Iv Sector</option>
+                            <option value="LA COLINA CAMPESTRE IV SECTOR E-11">La Colina Campestre Iv Sector</option>
+                            <option value="LA COLINA CAMPESTRE V SECTOR E-11">La Colina Campestre V Sector</option>
+                            <option value="LA COLINA CAMPESTRE V SECTOR E-11">La Colina Campestre V Sector</option>
+                            <option value="LA CONEJERA II ETAPA E-11">La Conejera Ii Etapa</option>
+                            <option value="LA ESMERALDA E-11">La Esmeralda</option>
+                            <option value="LA ESPERANZA E-11">La Esperanza</option>
+                            <option value="LA ESPERANZA BRITALIA E-11">La Esperanza Britalia</option>
+                            <option value="LA ESPERANZA BRITALIA E-11">La Esperanza Britalia</option>
+                            <option value="LA ESTANZUELA E-11">La Estanzuela</option>
+                            <option value="LA FLORESTA E-11">La Floresta</option>
+                            <option value="LA FLORESTA NORTE E-11">La Floresta Norte</option>
+                            <option value="LA FLORESTA NORTE I SECTOR E-11">La Floresta Norte I Sector</option>
+                            <option value="LA FLORESTA NORTE II SECTOR E-11">La Floresta Norte Ii Sector</option>
+                            <option value="LA FLORESTA NORTE V SECTOR E-11">La Floresta Norte V Sector</option>
+                            <option value="LA FLORIDA E-11">La Florida</option>
+                            <option value="LA FLORIDA E-11">La Florida</option>
+                            <option value="LA FLORIDA BRITALIA NORTE E-11">La Florida Britalia Norte</option>
+                            <option value="LA FONTANA E-11">La Fontana</option>
+                            <option value="LA FRANCIA E-11">La Francia</option>
+                            <option value="LA GAITANA E-11">La Gaitana</option>
+                            <option value="LA ISABELA E-11">La Isabela</option>
+                            <option value="LA ISABELA E-11">La Isabela</option>
+                            <option value="LA MANUELITA II SECTOR E-11">La Manuelita Ii Sector</option>
+                            <option value="LA MARIA E-11">La Maria</option>
+                            <option value="LA PALMA II E-11">La Palma Ii</option>
+                            <option value="LA PRADERA DE SUBA E-11">La Pradera De Suba</option>
+                            <option value="LA PUERTA DEL SOL E-11">La Puerta Del Sol</option>
+                            <option value="LA RIVIERA NORTE E-11">La Riviera Norte</option>
+                            <option value="LA RIVIERA NORTE E-11">La Riviera Norte</option>
+                            <option value="LA SABANA DE TIBABUYES E-11">La Sabana De Tibabuyes</option>
+                            <option value="LA SULTANA E-11">La Sultana</option>
+                            <option value="LA TOMA EL TRIANGULO E-11">La Toma El Triangulo</option>
+                            <option value="LA TOMA EL TRIANGULO E-11">La Toma El Triangulo</option>
+                            <option value="LA TOSCANA E-11">La Toscana</option>
+                            <option value="LA TRINITARIA E-11">La Trinitaria</option>
+                            <option value="LA TUNA E-11">La Tuna</option>
+                            <option value="LA URIBE E-11">La Uribe</option>
+                            <option value="LA VICTORIA E-11">La Victoria</option>
+                            <option value="LA VICTORIA NORTE E-11">La Victoria Norte</option>
+                            <option value="LA ZERREZUELA E-11">La Zerrezuela</option>
+                            <option value="LA ZERREZUELA E-11">La Zerrezuela</option>
+                            <option value="LAGO DE SUBA E-11">Lago De Suba</option>
+                            <option value="LAGOS DE CORDOBA E-11">Lagos De Cordoba</option>
+                            <option value="LAGOS DE SUBA E-11">Lagos De Suba</option>
+                            <option value="LAS ACACIAS E-11">Las Acacias</option>
+                            <option value="LAS ACACIAS E-11">Las Acacias</option>
+                            <option value="LAS COLINAS DE PRADO E-11">Las Colinas De Prado</option>
+                            <option value="LAS COLINAS DE PRADO E-11">Las Colinas De Prado</option>
+                            <option value="LAS FLORES E-11">Las Flores</option>
+                            <option value="LAS FLORESTA I SECTOR E-11">Las Floresta I Sector</option>
+                            <option value="LAS LOMITAS E-11">Las Lomitas</option>
+                            <option value="LAS MARGARITAS E-11">Las Margaritas</option>
+                            <option value="LAS MARGARITAS E-11">Las Margaritas</option>
+                            <option value="LAS MERCEDES E-11">Las Mercedes</option>
+                            <option value="LAS TERRAZAS E-11">Las Terrazas</option>
+                            <option value="LAS VILLAS DE MARIANA E-11">Las Villas De Mariana</option>
+                            <option value="LAS VILLAS I SECTOR E-11">Las Villas I Sector</option>
+                            <option value="LAS VILLAS II SECTOR E-11">Las Villas Ii Sector</option>
+                            <option value="LISBOA E-11">Lisboa</option>
+                            <option value="LOA ANDES E-11">Loa Andes</option>
+                            <option value="LOMA VERDE E-11">Loma Verde</option>
+                            <option value="LOMBARDIA E-11">Lombardia</option>
+                            <option value="LOMBARDIA II E-11">Lombardia Ii</option>
+                            <option value="LOMBARDIA III E-11">Lombardia Iii</option>
+                            <option value="LOMBARDIA III ETAPA - SECTOR A E-11">Lombardia Iii Etapa - Sector A</option>
+                            <option value="LONDRES E-11">Londres</option>
+                            <option value="LONDRES E-11">Londres</option>
+                            <option value="LOS ALCAPARROS DE SUBA E-11">Los Alcaparros De Suba</option>
+                            <option value="LOS ALMENDROS II SECTOR E-11">Los Almendros Ii Sector</option>
+                            <option value="LOS ARRAYANES DE SUBA E-11">Los Arrayanes De Suba</option>
+                            <option value="LOS ARRAYANES DE SUBA E-11">Los Arrayanes De Suba</option>
+                            <option value="LOS CEREZOS SAN JOAQUIN E-11">Los Cerezos San Joaquin</option>
+                            <option value="LOS COMUNEROS E-11">Los Comuneros</option>
+                            <option value="LOS LIBERTADORES E-11">Los Libertadores</option>
+                            <option value="LOS MADEROS DE SUBA E-11">Los Maderos De Suba</option>
+                            <option value="LOS MONARCAS E-11">Los Monarcas</option>
+                            <option value="LOS MONARCAS E-11">Los Monarcas</option>
+                            <option value="LOS NARANJOS E-11">Los Naranjos</option>
+                            <option value="LOS NARANJOS ALTOS E-11">Los Naranjos Altos</option>
+                            <option value="LOS NOGALES DE TIBABUYES E-11">Los Nogales De Tibabuyes</option>
+                            <option value="LOS PINARES E-11">Los Pinares</option>
+                            <option value="LOS PINOS E-11">Los Pinos</option>
+                            <option value="LOS PINOS E-11">Los Pinos</option>
+                            <option value="LOS PINOS DE SUBA E-11">Los Pinos De Suba</option>
+                            <option value="LOS PORTALES DEL NORTE I E-11">Los Portales Del Norte I</option>
+                            <option value="LOS PORTALES DEL NORTE III E-11">Los Portales Del Norte Iii</option>
+                            <option value="LOS SAUCES E-11">Los Sauces</option>
+                            <option value="LOS TEJARES DE SUBA E-11">Los Tejares De Suba</option>
+                            <option value="LOURDES E-11">Lourdes</option>
+                            <option value="LOURDES E-11">Lourdes</option>
+                            <option value="MALIBU E-11">Malibu</option>
+                            <option value="MAZUREN I SECTOR E-11">Mazuren I Sector</option>
+                            <option value="MIRADOR DE SUBA E-11">Mirador De Suba</option>
+                            <option value="MIRAMAR E-11">Miramar</option>
+                            <option value="MIRANDELA E-11">Mirandela</option>
+                            <option value="MONACO E-11">Monaco</option>
+                            <option value="MONTERREY E-11">Monterrey</option>
+                            <option value="MONTICELLO E-11">Monticello</option>
+                            <option value="MONTICELLO E-11">Monticello</option>
+                            <option value="MORATO E-11">Morato</option>
+                            <option value="NARANJOS E-11">Naranjos</option>
+                            <option value="NIZA LTDA. E-11">Niza Ltda.</option>
+                            <option value="NIZA NORTE E-11">Niza Norte</option>
+                            <option value="NIZA NORTE I SECTOR E-11">Niza Norte I Sector</option>
+                            <option value="NIZA NORTE II SECTOR E-11">Niza Norte Ii Sector</option>
+                            <option value="NIZA SUBA E-11">Niza Suba</option>
+                            <option value="NIZA SUR I E-11">Niza Sur I</option>
+                            <option value="NIZA SUR II E-11">Niza Sur Ii</option>
+                            <option value="NIZA SUR III E-11">Niza Sur Iii</option>
+                            <option value="NIZA SUR III E-11">Niza Sur Iii</option>
+                            <option value="NIZA TELECOM E-11">Niza Telecom</option>
+                            <option value="NIZA XII E-11">Niza Xii</option>
+                            <option value="NOGALES DE SUBA E-11">Nogales De Suba</option>
+                            <option value="NUEVA ALSACIA E-11">Nueva Alsacia</option>
+                            <option value="NUEVA ESCOCIA E-11">Nueva Escocia</option>
+                            <option value="NUEVA TIBABUYES E-11">Nueva Tibabuyes</option>
+                            <option value="NUEVA TIBABUYES I Y II SECTOR E-11">Nueva Tibabuyes I Y Ii Sector</option>
+                            <option value="NUEVO CORINTO E-11">Nuevo Corinto</option>
+                            <option value="NUEVO CORINTO SUBA E-11">Nuevo Corinto Suba</option>
+                            <option value="NUEVO MONTERREY E-11">Nuevo Monterrey</option>
+                            <option value="NUEVO SUBA E-11">Nuevo Suba</option>
+                            <option value="NUSHKILANDIA E-11">Nushkilandia</option>
+                            <option value="NUSHKILANDIA E-11">Nushkilandia</option>
+                            <option value="OASIS DE SAN JORGE E-11">Oasis De San Jorge</option>
+                            <option value="OASIS DE SAN JORGE E-11">Oasis De San Jorge</option>
+                            <option value="OIKOS LA COLINA E-11">Oikos La Colina</option>
+                            <option value="ORQUIDEAS E-11">Orquideas</option>
+                            <option value="ORQUIDEAS II SECTOR E-11">Orquideas Ii Sector</option>
+                            <option value="PALMA ALDEA E-11">Palma Aldea</option>
+                            <option value="PALMA ALDEA E-11">Palma Aldea</option>
+                            <option value="PARCELACION JARDIN E-11">Parcelacion Jardin</option>
+                            <option value="PARQUES DE LA COLINA I Y II ETAPA E-11">Parques De La Colina I Y Ii Etapa
+                            </option>
+                            <option value="PARQUES DEL CAMPO - EL CAMPITO E-11">Parques Del Campo - El Campito</option>
+                            <option value="PARQUES DEL CAMPO - EL CAMPITO E-11">Parques Del Campo - El Campito</option>
+                            <option value="PASADENA E-11">Pasadena</option>
+                            <option value="PASEO DE LA COLINA E-11">Paseo De La Colina</option>
+                            <option value="PASEO DE LA COLINA E-11">Paseo De La Colina</option>
+                            <option value="PASTEURIZADORA DE LECHE DOLAY E-11">Pasteurizadora De Leche Dolay</option>
+                            <option value="PEPE VALL SERRA E-11">Pepe Vall Serra</option>
+                            <option value="PIEDRA VERDE I SECTOR E-11">Piedra Verde I Sector</option>
+                            <option value="PIEDRA VERDE I SECTOR E-11">Piedra Verde I Sector</option>
+                            <option value="PIJAO DE ORO E-11">Pijao De Oro</option>
+                            <option value="PINO ALTO E-11">Pino Alto</option>
+                            <option value="PINOS DE LOMBARDIA E-11">Pinos De Lombardia</option>
+                            <option value="PLAZA BAVIERA E-11">Plaza Baviera</option>
+                            <option value="PLAZA BAVIERA E-11">Plaza Baviera</option>
+                            <option value="PLAZA EL RELOJ E-11">Plaza El Reloj</option>
+                            <option value="PLAZA EL RELOJ E-11">Plaza El Reloj</option>
+                            <option value="PONTEVEDRA I SECTOR E-11">Pontevedra I Sector</option>
+                            <option value="PONTEVEDRA II SECTOR E-11">Pontevedra Ii Sector</option>
+                            <option value="PORTAL DE SUBA E-11">Portal De Suba</option>
+                            <option value="PORTALES DEL NORTE E-11">Portales Del Norte</option>
+                            <option value="PORTOALEGRE E-11">Portoalegre</option>
+                            <option value="POTOSI E-11">Potosi</option>
+                            <option value="POTOSI I SECTOR E-11">Potosi I Sector</option>
+                            <option value="POTOSI I SECTOR E-11">Potosi I Sector</option>
+                            <option value="POTRERILLOS DE SUBA E-11">Potrerillos De Suba</option>
+                            <option value="PRADO CENTRAL E-11">Prado Central</option>
+                            <option value="PRADO CHESTNUT - HILL E-11">Prado Chestnut - Hill</option>
+                            <option value="PRADO PINZON E-11">Prado Pinzon</option>
+                            <option value="PRADO SUR E-11">Prado Sur</option>
+                            <option value="PRADO SUR E-11">Prado Sur</option>
+                            <option value="PRADO SUR (CALATAYUD) E-11">Prado Sur (Calatayud)</option>
+                            <option value="PRADO SUR (CALATAYUD) E-11">Prado Sur (Calatayud)</option>
+                            <option value="PRADO VERANIEGO E-11">Prado Veraniego</option>
+                            <option value="PRADO VERANIEGO NORTE E-11">Prado Veraniego Norte</option>
+                            <option value="PRADOS DE SANTA BARBARA E-11">Prados De Santa Barbara</option>
+                            <option value="PRADOS DE SUBA E-11">Prados De Suba</option>
+                            <option value="PREDIO AV BOYACA E-11">Predio Av Boyaca</option>
+                            <option value="PREDIO SAN CARLOS E-11">Predio San Carlos</option>
+                            <option value="PREDIO SAN CARLOS E-11">Predio San Carlos</option>
+                            <option value="PROVENZA E-11">Provenza</option>
+                            <option value="PROVENZA SAN CARLOS E-11">Provenza San Carlos</option>
+                            <option value="PUENTE LARGO E-11">Puente Largo</option>
+                            <option value="PUERTA DE ALCALA E-11">Puerta De Alcala</option>
+                            <option value="QUINUA E-11">Quinua</option>
+                            <option value="QUMRAN CONDOMINIO E-11">Qumran Condominio</option>
+                            <option value="RESIDENCIAL SUBA E-11">Residencial Suba</option>
+                            <option value="RINCON DE BOYACA E-11">Rincon De Boyaca</option>
+                            <option value="RINCON DE BRITALIA E-11">Rincon De Britalia</option>
+                            <option value="RINCON DE CANTALEJO E-11">Rincon De Cantalejo</option>
+                            <option value="RINCON DE LA COLINA E-11">Rincon De La Colina</option>
+                            <option value="RINCON DE SUBA E-11">Rincon De Suba</option>
+                            <option value="RINCON DEL KARMEL E-11">Rincon Del Karmel</option>
+                            <option value="RINCON DEL KARMEL E-11">Rincon Del Karmel</option>
+                            <option value="RINCON ESCUELA E-11">Rincon Escuela</option>
+                            <option value="RINCONCITO E-11">Rinconcito</option>
+                            <option value="RIO BAMBA E-11">Rio Bamba</option>
+                            <option value="RODESIA I ETAPA E-11">Rodesia I Etapa</option>
+                            <option value="RODESIA I ETAPA E-11">Rodesia I Etapa</option>
+                            <option value="RUBI E-11">Rubi</option>
+                            <option value="RUBI E-11">Rubi</option>
+                            <option value="SALAMANCA Y CALATAYUD E-11">Salamanca Y Calatayud</option>
+                            <option value="SALITRE E-11">Salitre</option>
+                            <option value="SALITRE I SECTOR E-11">Salitre I Sector</option>
+                            <option value="SALITRE II SECTOR E-11">Salitre Ii Sector</option>
+                            <option value="SALITRE IV SECTOR E-11">Salitre Iv Sector</option>
+                            <option value="SAN ANDRES AFIDRO E-11">San Andres Afidro</option>
+                            <option value="SAN ANDRES BAJO E-11">San Andres Bajo</option>
+                            <option value="SAN FRANCISCO NORTE E-11">San Francisco Norte</option>
+                            <option value="SAN LUIS E-11">San Luis</option>
+                            <option value="SANTA ROSITA E-11">Santa Rosita</option>
+                            <option value="TELECOM ARRAYANES E-11">Telecom Arrayanes</option>
+                            <option value="VEREDA SUBA CERROS E-11">Vereda Suba Cerros</option>
+                            <option value="VERONA E-11">Verona</option>
+                            <option value="VERSALLES ETAPAS 1">Versalles Etapas 1</option>
+                            <option value="VILLA CATALINA I-II E-11">Villa Catalina I-Ii</option>
+                            <option value="VILLA ESPERANZA E-11">Villa Esperanza</option>
+                            <option value="VILLA GORDA E-11">Villa Gorda</option>
+                            <option value="VILLA ROSARIO E-11">Villa Rosario</option>
+                            <option value="VILLAS DE COVARIA E-11">Villas De Covaria</option>
+                            <option value="VILLAS DE LAS FLORES E-11">Villas De Las Flores</option>
+                            <option value="VISTA BELLA E-11">Vista Bella</option>
+                            <option value="ZULIA E-11">Zulia</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <label for="name" class="control-label">Genero</label>
+                        <select class="selectpicker" data-live-search="true" title="Genero" id="genero">
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMENINO">Femenino</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <label for="name" class="control-label">Actividad en</label>
+                        <select class="selectpicker" data-live-search="true" title="Actividad en" id="actividad">
+                            <option value="SENDERO PUBLICO">Vias Público</option>
+                            <option value="LOCAL COMERCIAL">Local Comercial</option>
+                            <option value="PROPIEDAD PRIVADA">Propiedad Privada</option>
+                            <option value="ESTACION DE TRANSPORTE">Estación de Transporte</option>
+                            <option value="TRANSPORTE PUBLICO">Transporte Público</option>
+                            <option value="PARQUES">Parques</option>
+                            <option value="TRANSPORTE PRIVADO">Transporte Privado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" style="text-align: center;">
+                    <div class="col-md-12 p-4" style="padding-top: 40px;padding-bottom: 40px;">
+                        <div class="form-group" style="display: inline-block;">
+                            <button type="button" class="btn btn-lg btn-primary mb-2" id="generar">Generar
+                                Recomendaciones</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="row hidden" style="text-align: center;margin-top: 5%;" id="loading">
+            <div style="display: inline-block">
+                <div class="loader" id="loader-1"></div>
+            </div>
+        </div>
+        <div class="container hidden" style="margin-top: 40px;" id="recomendaciones">
+            <h1 class="text-break" style="margin-top: 10px;">Recomendaciones</h1>
+            <div style="padding-bottom: 40px;" id="puntaje_div">
+            </div>
+            <div class="list-group" id="listado_recomendaciones">
+                <a href="#" class="list-group-item list-group-item-action list-group-item-primary">
+                    <h4>Cambiar NOCHE por MAÑANA</h4>
+                    <button class="btn btn-success" type="button">
+                        Riesgo Bajo</button>
+                    <button class="btn btn-success" type="button">
+                        Puntaje <span class="badge">0.25</span>
+                    </button>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action list-group-item-primary">
+                    <h4>Cambiar FIN DE SEMANA por ENTRE SEMANA</h4>
+                    <button class="btn btn-warning" type="button">
+                        Riesgo Medio</button>
+                    <button class="btn btn-warning" type="button">
+                        Puntaje <span class="badge">0.4</span>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(function() {
+            $('#fecha').flatpickr({
+                enableTime: true,
+                allowInput: false,
+                dateFormat: "m-d H:i",
+                minDate: new Date(),
+                minuteIncrement: 30,
+            });
+            $('#fecha').on('change', function() {
+                if (!$('#fecha').val())
+                    toastr.error('La fecha debe ser mayor que la fecha actual');
+            });
+            $('select').selectpicker('mobile');
+
+            $('#generar').click(function() {
+                if (!$('#fecha').val() || !$('#barrio').val() ||
+                    !$('#genero').val() || !$('#actividad').val()) {
+                    toastr.error('No pueden haber datos vacios o sin seleccionar');
+                } else {
+                    $('#puntaje_div').empty();
+                    $('#listado_recomendaciones').empty();
+                    $('#loading').removeClass('hidden')
+                    $('#recomendaciones').addClass('hidden');
+                    $.ajax({
+                        url: 'http://18.225.32.175/api/recomendaciones',
+                        type: 'GET',
+                        data: {
+                            'fecha': $('#fecha').val(),
+                            'barrio': $('#barrio').val(),
+                            'genero': $('#genero').val(),
+                            'actividad': $('#actividad').val(),
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            $main_score = data['score'].toFixed(2)
+                            $pred = data['pred']
+                            if ($main_score > 0.6) {
+                                $riesgo = 'RIESGO ALTO';
+                                $tag = 'danger';
+                            } else if ($main_score > 0.3) {
+                                $riesgo = 'RIESGO MEDIO';
+                                $tag = 'warning';
+                            } else {
+                                $riesgo = 'RIESGO BAJO';
+                                $tag = 'success';
+                            }
+
+                            $('#puntaje_div').html('<h3 style="text-align: center;"><button class="btn-lg btn-' + $tag + '" type="button" style="margin-bottom: 5px"><strong>' +
+                                $riesgo + '</strong></button> <button style="margin-bottom: 5px" class="btn-lg btn-' + $tag + '" type="button"><strong>' +
+                                $pred + '</button> <button style="margin-bottom: 5px" class="btn-lg btn-' + $tag + '"" type="button">' +
+                                'Puntaje <span class="badge">' + $main_score + '</span></button></h3>');
+
+                            recommendations = data['recommendations']
+                            if (recommendations.length) {
+                                for (index in recommendations) {
+                                    $score = recommendations[index]['score'].toFixed(2)
+                                    if ($score > 0.6) {
+                                        $riesgo = 'RIESGO ALTO';
+                                        $tag = 'danger';
+                                    } else if ($score > 0.3) {
+                                        $riesgo = 'RIESGO MEDIO';
+                                        $tag = 'warning';
+                                    } else {
+                                        $riesgo = 'RIESGO BAJO';
+                                        $tag = 'success';
+                                    }
+                                    $('#listado_recomendaciones').append('<a href="#" class="list-group-item list-group-item-action list-group-item-primary">' +
+                                        '<h4><strong>' + (parseInt(index) + 1) + '. </strong> Si usted cambia <strong>' + recommendations[index]['if'] +
+                                        '</strong> por <strong>' + recommendations[index]['then'] + '</strong></h4><button class="btn btn-' + $tag + '" type="button"><strong>' +
+                                        $riesgo + '</strong></button> <button class = "btn btn-' + $tag + '" type = "button">Puntaje <span class="badge">' +
+                                        $score + '</span></button></a>')
+                                }
+                            } else {
+                                $('#listado_recomendaciones').append('<h3>Lo sentimos, no se encontraron recomendaciones para los criterios especificados</h3>');
+                            }
+
+                            $('#loading').addClass('hidden')
+                            $('#recomendaciones').removeClass('hidden');
+                        },
+                        error: function(request, error) {
+                            console.log("Request: " + JSON.stringify(request));
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+<footer class="footer">
+    <h5>TG MINSC - Pontifica Universidad Javeriana</h5>
+    <h5>Juan Camilo Montaña Granados</h5>
+    <h5>© 2021 Copyright - RMFAR</h5>
+    </div>
+</footer>
+
+</html>
